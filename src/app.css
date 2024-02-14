@@ -8,3 +8,7 @@
     align-items: flex-end;
     justify-content: flex-start;
 }
+
+.ui.inverted.dimmer{
+    background-color: rgba(255, 255, 255, 0) !important;
+}

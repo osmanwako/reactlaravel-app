@@ -1,5 +1,6 @@
 import axios from "axios";
 import { Component } from "react";
+import Loader from "./loader";
 
 export default class Customers extends Component {
   state = {
@@ -7,9 +8,14 @@ export default class Customers extends Component {
     loading: true,
     error: null,
   };
+
   componentDidMount() {
     this.getcustomers();
   }
+
+  editcustomer = (customer) => {
+   this.props.editcustomer(customer);
+  };
 
   getcustomers = async () => {
     this.setState({ loading: true });
@@ -36,7 +42,8 @@ export default class Customers extends Component {
   render() {
     const { customers } = this.state;
     return (
-      <div>
+      <div className="ui container mh">
+        {this.state.loading?<Loader />:''}
         {customers.length > 0 ? (
           <table className="ui celled table">
             <thead>
@@ -54,7 +61,7 @@ export default class Customers extends Component {
                   <td>{customer.lastname}</td>
                   <td>{customer.email}</td>
                   <td className="d-flex-center">
-                    <button className="ui mini blue button">Edit</button>
+                    <button className="ui mini blue button" onClick={()=>this.editcustomer(customer)}>Edit</button>
                     <button className="negative mini ui button">Delete</button>
                   </td>
                 </tr>
